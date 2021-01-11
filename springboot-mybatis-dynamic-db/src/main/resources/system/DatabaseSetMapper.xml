@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.nothinghere.dynamic.dao.system.mapper.DatabaseSetMapper">
+  <resultMap id="BaseResultMap" type="cn.nothinghere.dynamic.dao.system.entity.DatabaseSet">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="env" jdbcType="VARCHAR" property="env" />
+    <result column="module" jdbcType="VARCHAR" property="module" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="driver" jdbcType="VARCHAR" property="driver" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="enable" jdbcType="BIT" property="enable" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, env, module, url, driver, username, password, enable
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from database_set
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="listAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from database_set
+    where enable = true
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from database_set
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.nothinghere.dynamic.dao.system.entity.DatabaseSet">
+    insert into database_set (id, env, module, 
+      url, driver, username, 
+      password, enable)
+    values (#{id,jdbcType=BIGINT}, #{env,jdbcType=VARCHAR}, #{module,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{driver,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{enable,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.nothinghere.dynamic.dao.system.entity.DatabaseSet">
+    insert into database_set
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="env != null">
+        env,
+      </if>
+      <if test="module != null">
+        module,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="driver != null">
+        driver,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="enable != null">
+        enable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="env != null">
+        #{env,jdbcType=VARCHAR},
+      </if>
+      <if test="module != null">
+        #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="driver != null">
+        #{driver,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null">
+        #{enable,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.nothinghere.dynamic.dao.system.entity.DatabaseSet">
+    update database_set
+    <set>
+      <if test="env != null">
+        env = #{env,jdbcType=VARCHAR},
+      </if>
+      <if test="module != null">
+        module = #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="driver != null">
+        driver = #{driver,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null">
+        enable = #{enable,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.nothinghere.dynamic.dao.system.entity.DatabaseSet">
+    update database_set
+    set env = #{env,jdbcType=VARCHAR},
+      module = #{module,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      driver = #{driver,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      enable = #{enable,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

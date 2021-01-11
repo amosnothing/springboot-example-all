@@ -1,0 +1,62 @@
+<?mapper version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <properties resource="application.properties"/>
+    <context id="context" targetRuntime="MyBatis3">
+        <!-- 抑制警告 -->
+        <property name="suppressTypeWarnings" value="true"/>
+
+        <!-- generate entity时，生成hashcode和equals方法 -->
+        <!-- <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" /> -->
+        <!-- generate entity时，生成serialVersionUID -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!-- 这个插件只会增加字符串字段映射到一个JDBC字符的方法 -->
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
+        <!-- generate entity时,生成toString -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+        <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- 配置与 properties resource 文件相关联 -->
+        <jdbcConnection connectionURL="${spring.beta.datasource.url}" userId="${spring.beta.datasource.username}"
+                        password="${spring.beta.datasource.password}" driverClass="${spring.beta.datasource.driver-class-name}">
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- generate entity setting-->
+        <javaModelGenerator targetPackage="cn.nothinghere.multiple.dao.beta.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+            <property name="isMergeable" value="false"/>
+        </javaModelGenerator>
+
+        <!-- generate mapper setting-->
+        <sqlMapGenerator targetPackage="beta" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- generate Mapper.java setting-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.nothinghere.multiple.dao.beta.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!--  -->
+        <table tableName="teacher" domainObjectName="Teacher" modelType="flat" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <!-- 使用实际的列名作为属性名 ， 针对数据库内字段为驼峰形式  -->
+            <!-- 如果是下划线做区分的字段 ， 记得置为 false 或者删掉该配置 -->
+            <!-- <property name="useActualColumnNames" value="true"/> -->
+        </table>
+    </context>
+</generatorConfiguration>
